@@ -1,0 +1,60 @@
+body {
+  font-size: 16px;
+  background-color: #808080;
+}
+
+.grid {
+  background-color: white;
+  border: 1px solid black;
+  line-height: 1.5em;
+  max-width: 50em; 
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+
+.category, .item {
+  padding: 1em;
+}
+
+.category {
+  border-right: 1px solid #D3D3D3;
+}
+
+a {
+  color: #FF4500;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5em 0;
+}
+
+a {
+  text-decoration: None;
+}
+
+button > a {
+  color: black;
+}
+
+a:hover, button:hover {
+  font-weight: bold;
+}
+
+textarea {
+  width: 40em;
+  height: 15em;
+  white-space: pre-line;
+}
+
+.flash {
+  color: blue;
+}
+
+#signinButton {
+  margin: 0 auto;
+}
