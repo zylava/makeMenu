@@ -8,10 +8,8 @@
        <a href='{{ url_for('items_of_category', category_name=category.name) }}'>{{ category.name }}</a>
       <br>
     {% endfor %}
+    <a href='{{ url_for('add_item') }}'>Add Item</a>
   </div>
-  {% block latest_items %}
-  {% endblock %}
-
   {% block items_of_category %}
   {% endblock %}
 </div>
