@@ -8,7 +8,6 @@ from flask.json import jsonify, loads
 from sqlalchemy.orm.exc import NoResultFound
 from database_setup import app, db, Category, Item
 
-from form import MyForm
 
 @app.route('/')
 @app.route('/catalog/')
