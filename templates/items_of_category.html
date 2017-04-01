@@ -1,0 +1,19 @@
+{% extends 'homepage.html' %}
+
+{% block items_of_category %}
+<div class="item">
+  {% set num_items = category.items|length %} 
+  {% if num_items < 2 %}
+    {% set noun = 'item' %}
+  {% else %}
+    {% set noun = 'items' %}
+  {% endif %}
+  <h2>{{ category.name }} ({{ num_items }} {{ noun }})</h2>
+  {% for item in category.items %}
+    <a href='{{ url_for('show_item', category_name=category.name, item_name=item.name) }}'>{{ item.name }}</a>
+    <br>
+  {% endfor %}
+  <hr>
+  <a href='{{ url_for('homepage') }}'>Home</a>
+</div>
+{% endblock %}

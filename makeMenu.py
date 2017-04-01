@@ -8,6 +8,20 @@ from flask.json import jsonify, loads
 from sqlalchemy.orm.exc import NoResultFound
 from database_setup import app, db, Category, Item
 
+@app.route('/catalog/<string:category_name>/items/')
+def items_of_category(category_name):
+    categories = Category.query.order_by(Category.name)
+    category = Category.query.filter_by(name=category_name).one()
+    return render_template(
+                          'items_of_category.html',
+                          categories=categories,
+                          category=category
+                          )
+
+@app.route('/catalog/<string:category_name>/<string:item_name>/')
+def show_item(category_name, item_name):
+    item = Item.query.filter_by(name=item_name).one()
+    return render_template('show_item.html', item=item)
 
 @app.route('/')
 @app.route('/catalog/')
