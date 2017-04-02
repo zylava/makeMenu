@@ -1,0 +1,3 @@
+To use this crawler:
+$python crawl.py
+recipes will be saved in recipeList.txt in the format of recipeList_base.txt
