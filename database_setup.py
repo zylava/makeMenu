@@ -15,7 +15,7 @@ class Recipe(db.Model):
 class Description(db.Model):
 	__tablename__ = 'description'
 
-	description = db.Column(db.String(500), primary_key=True)
+	description = db.Column(db.String(5000), primary_key=True)
 	recipe_name = db.Column(db.String, db.ForeignKey('recipe.name'))
 	recipe = db.relationship(
                            'Recipe',
