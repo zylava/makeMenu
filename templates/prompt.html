@@ -22,7 +22,7 @@
     {% for key,value in incomplete_recipe_list.iteritems() %}
     <tr>       
       <th>
-        <a href='{{ url_for('ingredients_of_recipe', recipe_name=recipe) }}'>{{ key }}</a>
+        <a href='{{ url_for('ingredients_of_recipe', recipe_name=key) }}'>{{ key }}</a>
       </th>
       <th>
          {% for missing_ingredient in value %}
