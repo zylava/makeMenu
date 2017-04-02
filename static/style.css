@@ -5,9 +5,8 @@ body {
 
 .grid {
   background-color: white;
-  border: 1px solid black;
   line-height: 1.5em;
-  max-width: 50em; 
+  max-width: 80%; 
   margin: 0 auto;
 }
 
@@ -24,6 +23,8 @@ body {
 .category {
   border-right: 1px solid #D3D3D3;
 }
+
+
 
 a {
   color: #FF4500;

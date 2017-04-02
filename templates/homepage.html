@@ -3,13 +3,14 @@
 {% block homepage %}
 <div class="row">
   <div class="category">
+    <a href='{{ url_for('homepage') }}' class="special">Home</a>
     <h2>Recipes</h2>
     {% for recipe in recipes %}
        <a href='{{ url_for('ingredients_of_recipe', recipe_name=recipe.name) }}'>{{ recipe.name }}</a>
       <br>
     {% endfor %}
+    <a href='{{ url_for('query_for_recipe') }}' class="special">Query</a>
   </div>
-  <a href='{{ url_for('query_for_recipe') }}'>Query</a>
   {% block ingredients_of_recipe %}
   {% endblock %}
 </div>
