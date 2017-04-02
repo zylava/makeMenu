@@ -16,10 +16,10 @@ def matchRecipe( items , recipes ):
 					#print(dish)
 					pass
 	
-	else:
-		print('Lack ingredients:')
-		for dish in incompleteDishes:
-			print(dish + ': ' + ' '.join(list(incompleteDishes[dish])))
+			else:
+				print('Lack ingredients:')
+				for dish in incompleteDishes:
+					print(dish + ': ' + ' '.join(list(incompleteDishes[dish])))
 	return dishes
 
 

@@ -12,12 +12,27 @@ class Recipe(db.Model):
 
     name = db.Column(db.String(80), primary_key=True)
 
+class Description(db.Model):
+	__tablename__ = 'description'
+
+	description = db.Column(db.String(500), primary_key=True)
+	recipe_name = db.Column(db.String, db.ForeignKey('recipe.name'))
+	recipe = db.relationship(
+                           'Recipe',
+                           backref=db.backref('description')
+                              )
+
+	@property
+	def serialize(self):
+		return {
+			'description': self.description,
+			'recipe_name': self.recipe_name
+		}
 
 class Ingredient(db.Model):
     __tablename__ = 'ingredient'
 
     name = db.Column(db.String(80), primary_key=True)
-    description = db.Column(db.Text, nullable=False)
     recipe_name = db.Column(db.String, db.ForeignKey('recipe.name'))
 
     recipe = db.relationship(
@@ -29,7 +44,6 @@ class Ingredient(db.Model):
     def serialize(self):
         return {
                 'name': self.name,
-                'description': self.description,
                 'recipe_name': self.recipe_name
                }
 
