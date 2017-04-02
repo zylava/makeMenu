@@ -6,7 +6,7 @@ from flask import Flask, request, redirect, url_for, flash, render_template, \
 from flask.json import jsonify, loads
 
 from sqlalchemy.orm.exc import NoResultFound
-from database_setup import app, db, Recipe, Ingredient
+from database_setup import app, db, Recipe, Ingredient, Description
 
 from form import MyForm
 
@@ -14,9 +14,9 @@ from match_ingredients import matchRecipe
 
 @app.route('/catalog/<string:recipe_name>/ingredients/')
 def ingredients_of_recipe(recipe_name):
-    recipes = Recipe.query.order_by(Recipe.name)
-    recipe = Recipe.query.filter_by(name=recipe_name).one()
-    return render_template(
+	recipes = Recipe.query.order_by(Recipe.name)
+	recipe = Recipe.query.filter_by(name=recipe_name).one()
+	return render_template(
                           'ingredients_of_recipe.html',
                           recipes=recipes,
                           recipe=recipe
@@ -40,14 +40,17 @@ def query_for_recipe():
         for recipe in recipes:
             ingre_list = [str(ingre.name) for ingre in recipe.ingredients]
             recipe_to_ingredient_map[str(recipe.name)] = ingre_list
-    	#print recipe_to_ingredient_map
-        print(recipe_to_ingredient_map)
-        (dishes,incompleteDishes) = matchRecipe(user_list, recipe_to_ingredient_map)
+	print "map: "
+    	print recipe_to_ingredient_map
+        #print(recipe_to_ingredient_map)
+        (dishes,incomplete_dishes) = matchRecipe(user_list, recipe_to_ingredient_map)
+	print "dishes: "
         print(dishes)
-        print(incompleteDishes)
+	print "incomplete dishes: "
+        print(incomplete_dishes)
         return render_template('prompt.html',
                                 recipe_list=dishes,
-				incomplete_recipe_list=incompleteDishes
+				incomplete_recipe_list=incomplete_dishes
                                 )
 
 

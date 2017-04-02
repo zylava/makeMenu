@@ -1,9 +1,6 @@
 from database_setup import db, Recipe, Ingredient
 
-recipe_1 = Recipe(name='Mapo')
-recipe_2 = Recipe(name='Hongshao')
-recipe_3 = Recipe(name='Jiaozi')
-recipe_4 = Recipe(name='Spicy Chiken and Spelt Salad')
+recipe_4 = Recipe(name='Spicy Chicken and Spelt Salad')
 recipe_5 = Recipe(name='Lemon Herb Chicken')
 recipe_6 = Recipe(name='Vegetable Salad')
 recipe_7 = Recipe(name='Maple Salmon')
@@ -19,9 +16,7 @@ recipe_16 = Recipe(name='Potato Salad')
 recipe_17 = Recipe(name='Penne Pasta with Spinach and Bacon')
 
 
-db.session.add(recipe_1)
-db.session.add(recipe_2)
-db.session.add(recipe_3)
+
 db.session.add(recipe_4)
 db.session.add(recipe_5)
 db.session.add(recipe_6)

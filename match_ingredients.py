@@ -7,6 +7,7 @@ def matchRecipe( items , recipes ):
 	sorted(items)
 	for recipe in recipes:
 		if set(recipes[recipe]) <= set(items):
+			print "::: " + recipe
 			dishes.append(recipe)
 		else:
 			if len(set(recipes[recipe]) - set(items)) <= 3:

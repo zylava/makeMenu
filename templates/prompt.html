@@ -3,10 +3,34 @@
 {% block prompt %}
 <h1>recipes</h1>
 <br>
-
+{% if recipe_list %}
+  <h2>Recipes that you are ready for</h2>
+{% endif %}
     {% for recipe in recipe_list %}
       <a href='{{ url_for('ingredients_of_recipe', recipe_name=recipe) }}'>{{ recipe }}</a>
       <br>
     {% endfor %}
+
+<h2>Recipes that lack some ingredients</h2>
+  <table>
+    <tr>
+      <th>Recipe</th>
+      <th>Missing Ingredients</th>
+    </tr>
+    {% for key,value in incomplete_recipe_list.iteritems() %}
+    <tr>       
+      <th>
+        <a href='{{ url_for('ingredients_of_recipe', recipe_name=recipe) }}'>{{ key }}</a>
+      </th>
+      <th>
+         {% for missing_ingredient in value %}
+     		{{ missing_ingredient }}
+     		 <br>
+   	 {% endfor %}
+      </th>
+      <br>
+    </tr>
+    {% endfor %}
+  </table>
 
 {% endblock %}

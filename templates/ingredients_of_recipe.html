@@ -8,9 +8,15 @@
   {% else %}
     {% set noun = 'Ingredients' %}
   {% endif %}
-  <h2>{{ recipe.name }} ({{ num_ingredients }} {{ noun }})</h2>
+  <h2>{{ recipe.name }}</h2>
+  <h3>Ingredients ({{ num_ingredients }} {{ noun }})</h3>
   {% for ingredient in recipe.ingredients %}
     {{ ingredient.name }}
+    <br>
+  {% endfor %}
+  <h3>Direction </h3>
+   {% for description in recipe.description %}
+    {{ description.description }}
     <br>
   {% endfor %}
   <hr>
