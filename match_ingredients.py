@@ -6,21 +6,12 @@ def matchRecipe( items , recipes ):
 	dishes = []
 	sorted(items)
 	for recipe in recipes:
-		if set(recipes[recipe]) < set(items):
+		if set(recipes[recipe]) <= set(items):
 			dishes.append(recipe)
 		else:
 			if len(set(recipes[recipe]) - set(items)) <= 3:
-				incompleteDishes[recipe] = set(recipes[recipe]) - set(items)
-			if len(dishes) != 0:
-				for dish in dishes:
-					#print(dish)
-					pass
-	
-			else:
-				print('Lack ingredients:')
-				for dish in incompleteDishes:
-					print(dish + ': ' + ' '.join(list(incompleteDishes[dish])))
-	return dishes
+				incompleteDishes[recipe] = list(set(recipes[recipe]) - set(items))
+	return (dishes,incompleteDishes)
 
 
 ### Test cases ####
