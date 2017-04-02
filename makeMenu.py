@@ -28,27 +28,32 @@ def show_ingredient(recipe_name, ingredient_name):
     return render_template('show_ingredient.html', ingredient=ingredient)
 
 @app.route('/catalog/add/', methods=['GET', 'POST'])
-def add_ingredient():
+def query_for_recipe():
     form = MyForm()
     if form.validate_on_submit():
-        description = form.description.data
-	user_list = [str(w).strip() for w in description.split(',')]
-	print user_list
-	recipes = Recipe.query.order_by(Recipe.name)
-	recipe_to_ingredient_map = {}
-	for recipe in recipes:
-		ingre_list = [str(ingre.name) for ingre in recipe.ingredients]
-		recipe_to_ingredient_map[str(recipe.name)] = ingre_list
-	print recipe_to_ingredient_map
-	dishes = matchRecipe(user_list, recipe_to_ingredient_map)
-	print dishes
-	l = ['Mapo','Jiaozi']
-	return render_template('prompt.html', recipe_list=l)
-	
+        ingredients = form.ingredients.data
+        user_list = [str(w).strip() for w in ingredients.split(',')]
+	    #print user_list
+        print(user_list)
+        recipes = Recipe.query.order_by(Recipe.name)
+        recipe_to_ingredient_map = {}
+        for recipe in recipes:
+            ingre_list = [str(ingre.name) for ingre in recipe.ingredients]
+            recipe_to_ingredient_map[str(recipe.name)] = ingre_list
+    	#print recipe_to_ingredient_map
+        print(recipe_to_ingredient_map)
+        (dishes,incompleteDishes) = matchRecipe(user_list, recipe_to_ingredient_map)
+        print(dishes)
+        print(incompleteDishes)
+        return render_template('prompt.html',
+                                recipe_list=dishes,
+				incomplete_recipe_list=incompleteDishes
+                                )
+
 
     if request.method == "POST":
         if not (form.description.data):
-            flash("You have to fill name and description about the ingredient.")            
+            flash("You have to fill name and description about the ingredient.")
 
     return render_template('add_or_edit_ingredient.html', form=form)
 

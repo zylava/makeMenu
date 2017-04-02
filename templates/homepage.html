@@ -8,8 +8,8 @@
        <a href='{{ url_for('ingredients_of_recipe', recipe_name=recipe.name) }}'>{{ recipe.name }}</a>
       <br>
     {% endfor %}
-    <a href='{{ url_for('add_ingredient') }}'>Add Ingredient</a>
   </div>
+  <a href='{{ url_for('query_for_recipe') }}'>Query</a>
   {% block ingredients_of_recipe %}
   {% endblock %}
 </div>

@@ -9,5 +9,5 @@ from wtforms import StringField, TextAreaField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Regexp, Length
 
 class MyForm(FlaskForm):
-    description = TextAreaField('Description', validators=[DataRequired()])
+    ingredients = TextAreaField('Ingredients', validators=[DataRequired()])
     submit = SubmitField('Submit')
