@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block prompt %}
+<h1>recipes</h1>
+<br>
+
+    {% for recipe in recipe_list %}
+      <a href='{{ url_for('ingredients_of_recipe', recipe_name=recipe) }}'>{{ recipe }}</a>
+      <br>
+    {% endfor %}
+
+{% endblock %}

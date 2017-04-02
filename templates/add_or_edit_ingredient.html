@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block add_or_edit_ingredient %}
+<div class="row">
+  <div class="item">
+
+      {% set header = 'Add Ingredient' %}
+
+    <h2>{{ header }}</h2>
+    <form method='post'>
+      {{ form.csrf_token }}
+      {{ form.description.label }}:<br>{{ form.description() }}<br><br>
+        <button type="button"><a href='{{ url_for('homepage') }}'>Cancel</a></button>
+      {{ form.submit }}
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <br>
+            <span class='flash'>{{ message }}</span>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </form>
+  </div>
+</div>
+{% endblock %}

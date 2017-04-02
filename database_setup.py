@@ -2,27 +2,27 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///item_catalog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ingredient_catalog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class Category(db.Model):
-    __tablename__ = 'category'
+class Recipe(db.Model):
+    __tablename__ = 'recipe'
 
     name = db.Column(db.String(80), primary_key=True)
 
 
-class Item(db.Model):
-    __tablename__ = 'item'
+class Ingredient(db.Model):
+    __tablename__ = 'ingredient'
 
     name = db.Column(db.String(80), primary_key=True)
     description = db.Column(db.Text, nullable=False)
-    category_name = db.Column(db.String, db.ForeignKey('category.name'))
+    recipe_name = db.Column(db.String, db.ForeignKey('recipe.name'))
 
-    category = db.relationship(
-                           'Category',
-                           backref=db.backref('items')
+    recipe = db.relationship(
+                           'Recipe',
+                           backref=db.backref('ingredients')
                               )
 
     @property
@@ -30,7 +30,7 @@ class Item(db.Model):
         return {
                 'name': self.name,
                 'description': self.description,
-                'category_name': self.category_name
+                'recipe_name': self.recipe_name
                }
 
 db.create_all()

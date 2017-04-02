@@ -1,0 +1,19 @@
+{% extends 'homepage.html' %}
+
+{% block ingredients_of_recipe %}
+<div class="item">
+  {% set num_ingredients = recipe.ingredients|length %} 
+  {% if num_ingredients < 2 %}
+    {% set noun = 'Ingredient' %}
+  {% else %}
+    {% set noun = 'Ingredients' %}
+  {% endif %}
+  <h2>{{ recipe.name }} ({{ num_ingredients }} {{ noun }})</h2>
+  {% for ingredient in recipe.ingredients %}
+    <a href='{{ url_for('show_ingredient', recipe_name=recipe.name, ingredient_name=ingredient.name) }}'>{{ ingredient.name }}</a>
+    <br>
+  {% endfor %}
+  <hr>
+  <a href='{{ url_for('homepage') }}'>Home</a>
+</div>
+{% endblock %}

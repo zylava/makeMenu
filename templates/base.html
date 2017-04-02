@@ -2,7 +2,7 @@
 <html itemscope itemtype="http://schema.org/Article">
 <head>
   <meta charset="utf-8">
-  <title>Item Catalog</title>
+  <title>Recipe Catalog</title>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 
   <!-- BEGIN Google OAuth Pre-requisites -->
@@ -37,10 +37,10 @@
     {% block prompt %}
     {% endblock %}
 
-    {% block show_item %}
+    {% block show_ingredient %}
     {% endblock %}
 
-    {% block add_or_edit_item %}
+    {% block add_or_edit_ingredient %}
     {% endblock %}
 
     {% block delete %}

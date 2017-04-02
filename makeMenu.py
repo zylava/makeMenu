@@ -6,53 +6,59 @@ from flask import Flask, request, redirect, url_for, flash, render_template, \
 from flask.json import jsonify, loads
 
 from sqlalchemy.orm.exc import NoResultFound
-from database_setup import app, db, Category, Item
+from database_setup import app, db, Recipe, Ingredient
 
 from form import MyForm
 
-@app.route('/catalog/<string:category_name>/items/')
-def items_of_category(category_name):
-    categories = Category.query.order_by(Category.name)
-    category = Category.query.filter_by(name=category_name).one()
+from match_ingredients import matchRecipe
+
+@app.route('/catalog/<string:recipe_name>/ingredients/')
+def ingredients_of_recipe(recipe_name):
+    recipes = Recipe.query.order_by(Recipe.name)
+    recipe = Recipe.query.filter_by(name=recipe_name).one()
     return render_template(
-                          'items_of_category.html',
-                          categories=categories,
-                          category=category
+                          'ingredients_of_recipe.html',
+                          recipes=recipes,
+                          recipe=recipe
                           )
 
-@app.route('/catalog/<string:category_name>/<string:item_name>/')
-def show_item(category_name, item_name):
-    item = Item.query.filter_by(name=item_name).one()
-    return render_template('show_item.html', item=item)
+@app.route('/catalog/<string:recipe_name>/<string:ingredient_name>/')
+def show_ingredient(recipe_name, ingredient_name):
+    ingredient = Ingredient.query.filter_by(name=ingredient_name).one()
+    return render_template('show_ingredient.html', ingredient=ingredient)
 
 @app.route('/catalog/add/', methods=['GET', 'POST'])
-def add_item():
+def add_ingredient():
     form = MyForm()
     if form.validate_on_submit():
         description = form.description.data
 	user_list = [str(w).strip() for w in description.split(',')]
-	categories = Category.query.order_by(Category.name)
+	print user_list
+	recipes = Recipe.query.order_by(Recipe.name)
 	recipe_to_ingredient_map = {}
-	for recipe in categories:
-		ingre_list = [str(ingre.name) for ingre in recipe.items]
+	for recipe in recipes:
+		ingre_list = [str(ingre.name) for ingre in recipe.ingredients]
 		recipe_to_ingredient_map[str(recipe.name)] = ingre_list
 	print recipe_to_ingredient_map
-	return redirect(url_for('homepage'))
+	dishes = matchRecipe(user_list, recipe_to_ingredient_map)
+	print dishes
+	l = ['Mapo','Jiaozi']
+	return render_template('prompt.html', recipe_list=l)
 	
 
     if request.method == "POST":
         if not (form.description.data):
-            flash("You have to fill name and description about the item.")            
+            flash("You have to fill name and description about the ingredient.")            
 
-    return render_template('add_or_edit_item.html', form=form)
+    return render_template('add_or_edit_ingredient.html', form=form)
 
 @app.route('/')
 @app.route('/catalog/')
 def homepage():
-    categories = Category.query.order_by(Category.name)
+    recipes = Recipe.query.order_by(Recipe.name)
     return render_template(
                           'homepage.html',
-                          categories=categories
+                          recipes=recipes
                           )
 
 

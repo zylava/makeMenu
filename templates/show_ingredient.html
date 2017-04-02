@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block show_ingredient %}
+<div class="row">
+  <div class="item">
+    <h2>{{ ingredient.name }}</h2>
+    <u>owner: {{ ingredient.user.name }}</u>
+    <br>
+    {% for line in ingredient.description.splitlines() %}
+      {{ line }}
+      <br>
+    {% endfor %}
+    <br>
+    <a href='{{ url_for('edit_ingredient', ingredient_name=ingredient.name) }}'>Edit</a>
+    |
+    <a href='{{ url_for('delete_ingredient', ingredient_name=ingredient.name) }}'>Delete</a>
+    |
+    <a href='{{ url_for('json_endpoint', ingredient_name=ingredient.name) }}'>JSON</a>
+    <hr> 
+    <a href='{{ url_for('ingredients_of_category', category_name=ingredient.category.name) }}'>Category</a>
+    |
+    <a href='{{ url_for('homepage') }}'>Home</a>
+  </div>
+</div>
+{% endblock %}
